@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ВНИМАНИЕ!</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background: red;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      animation: shake 0.1s infinite;
+      user-select: none;
+      pointer-events: none;
+    }
+    h1 {
+      font-size: 48px;
+      margin-top: 40vh;
+    }
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(3px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(3px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(1px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>⚠️ ВИРУС ОБНАРУЖЕН ⚠️</h1>
+  <p>Система заблокирована на 17 секунд...</p>
 
+  <audio id="alarm" autoplay loop>
+    <source src="https://freesound.org/data/previews/331/331912_3248244-lq.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Блокировка выхода на 17 секунд
+    let blockUnload = true;
+    setTimeout(() => {
+      blockUnload = false;
+      window.onbeforeunload = null;
+      document.body.innerHTML = '<h1>Это была шутка! 😄</h1><p>Ты свободен!</p>';
+      document.body.style = 'background: green; color: white; font-size: 30px; padding-top: 30vh;';
+      document.getElementById('alarm').pause();
+    }, 17000);
+
+    window.onbeforeunload = function () {
+      if (blockUnload) {
+        return "Страница временно заблокирована!";
+      }
+    };
+  </script>
+</body>
+</html>
